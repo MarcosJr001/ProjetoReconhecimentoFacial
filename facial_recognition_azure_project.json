@@ -1,0 +1,62 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "resources": [
+        {
+            "type": "Microsoft.Resources/resourceGroups",
+            "apiVersion": "2021-04-01",
+            "name": "FacialRecognitionProjectRG",
+            "location": "East US"
+        },
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2021-06-01",
+            "name": "facialrecogstorage",
+            "location": "East US",
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "kind": "StorageV2"
+        },
+        {
+            "type": "Microsoft.CognitiveServices/accounts",
+            "apiVersion": "2021-10-01",
+            "name": "facialRecognitionCognitive",
+            "location": "East US",
+            "sku": {
+                "name": "S1"
+            },
+            "kind": "Face",
+            "properties": {
+                "networkAcls": {
+                    "defaultAction": "Allow",
+                    "virtualNetworkRules": [],
+                    "ipRules": []
+                },
+                "publicNetworkAccess": "Enabled",
+                "apiProperties": {
+                    "qnaRuntimeEndpoint": "https://facialRecognitionCognitive.cognitiveservices.azure.com/"
+                }
+            },
+            "dependsOn": [
+                "Microsoft.Resources/resourceGroups/FacialRecognitionProjectRG"
+            ]
+        },
+        {
+            "type": "Microsoft.MachineLearningServices/workspaces",
+            "apiVersion": "2023-04-01",
+            "name": "facialRecogMLWorkspace",
+            "location": "East US",
+            "properties": {
+                "description": "Azure ML workspace for facial recognition and image data transformation.",
+                "storageAccount": "facialrecogstorage",
+                "containerRegistry": "",
+                "applicationInsights": "",
+                "keyVault": ""
+            },
+            "dependsOn": [
+                "Microsoft.Storage/storageAccounts/facialrecogstorage"
+            ]
+        }
+    ]
+}
