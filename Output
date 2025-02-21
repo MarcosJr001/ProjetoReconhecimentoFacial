@@ -1,1 +1,33 @@
+{
+    "image": "A_realistic_portrait_of_a_diverse_group_of_people_.png",
+    "faces_detected": [
+        {
+            "faceId": "12345abc",
+            "age": 28,
+            "gender": "male",
+            "emotion": {"happiness": 0.9, "neutral": 0.1, "anger": 0.0},
+            "smile": true
+        },
+        {
+            "faceId": "67890def",
+            "age": 35,
+            "gender": "female",
+            "emotion": {"happiness": 0.3, "neutral": 0.6, "sadness": 0.1},
+            "smile": false
+        },
+        {
+            "faceId": "11223ghi",
+            "age": 42,
+            "gender": "male",
+            "emotion": {"happiness": 0.1, "neutral": 0.8, "anger": 0.1},
+            "smile": false
+        }
+    ],
+    "summary": {
+        "total_faces": 3,
+        "average_age": 35,
+        "gender_distribution": {"male": 2, "female": 1},
+        "most_common_emotion": "neutral"
+    }
+}
 
